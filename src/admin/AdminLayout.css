@@ -1,0 +1,406 @@
+/* ============================================================
+   Zara Cars — Luxury Dealership Admin Layout
+   Palette: Dark Charcoal (#0a0a0c, #111115), Silver, Champagne Gold
+   ============================================================ */
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #08080a;
+  color: #c5c9d1;
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  cursor: auto !important;
+}
+
+.admin-layout * {
+  cursor: auto !important;
+  box-sizing: border-box;
+}
+
+.admin-layout button,
+.admin-layout a,
+.admin-layout input,
+.admin-layout select,
+.admin-layout textarea {
+  cursor: pointer !important;
+}
+
+.admin-layout input[type="text"],
+.admin-layout input[type="number"],
+.admin-layout input[type="email"],
+.admin-layout input[type="password"],
+.admin-layout textarea {
+  cursor: text !important;
+}
+
+/* --- SIDEBAR --- */
+.admin-sidebar {
+  width: 280px;
+  background: #0d0d11;
+  border-right: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 90;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.admin-sidebar__header {
+  padding: 1.75rem 1.5rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.admin-sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.admin-sidebar__logo-wrap {
+  width: 36px;
+  height: 36px;
+  background: radial-gradient(circle at top left, #332615 0%, #17140e 100%);
+  border: 1px solid rgba(200, 169, 106, 0.35);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c8a96a;
+}
+
+.admin-sidebar__title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.45rem;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.admin-sidebar__tagline {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #c8a96a;
+  display: block;
+}
+
+/* System status indicator */
+.admin-sidebar__status {
+  margin: 1.25rem 1.5rem 0.5rem;
+  padding: 0.75rem 0.85rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-sidebar__status-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-sidebar__status-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #7a7e87;
+}
+
+.admin-sidebar__status-val {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-dot--live {
+  background: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+.status-dot--demo {
+  background: #c8a96a;
+  box-shadow: 0 0 8px rgba(200, 169, 106, 0.5);
+}
+
+/* Navigation */
+.admin-sidebar__nav {
+  padding: 1rem 1rem;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.admin-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  color: #94a3b8;
+  font-size: 0.875rem;
+  font-weight: 400;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.admin-nav-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+}
+
+.admin-nav-item.active {
+  background: linear-gradient(90deg, rgba(200, 169, 106, 0.14) 0%, rgba(200, 169, 106, 0.03) 100%);
+  color: #f1ebd8;
+  font-weight: 500;
+  border-left: 3px solid #c8a96a;
+}
+
+.admin-nav-item__badge {
+  margin-left: auto;
+  background: rgba(200, 169, 106, 0.2);
+  color: #c8a96a;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+}
+
+/* Sidebar Footer User Info */
+.admin-sidebar__footer {
+  padding: 1.25rem 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: #0a0a0e;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-sidebar__user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  overflow: hidden;
+}
+
+.admin-sidebar__avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #1c1d24;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #c8a96a;
+  flex-shrink: 0;
+}
+
+.admin-sidebar__user-details {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.admin-sidebar__username {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #f1f5f9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-sidebar__userrole {
+  font-size: 0.68rem;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.admin-sidebar__logout-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.admin-sidebar__logout-btn:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #ef4444;
+}
+
+/* --- MAIN CONTENT WRAPPER --- */
+.admin-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+/* Top Navigation Bar */
+.admin-topbar {
+  height: 64px;
+  background: #0d0d11;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 80;
+}
+
+.admin-topbar__left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.admin-topbar__menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #c0c0c0;
+  font-size: 1.4rem;
+  padding: 0.25rem;
+}
+
+.admin-topbar__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #717684;
+}
+
+.admin-topbar__breadcrumb-active {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.admin-topbar__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.admin-topbar__public-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  padding: 0.45rem 0.85rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.admin-topbar__public-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.admin-topbar__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #0b0b0e;
+  background: #c8a96a;
+  padding: 0.5rem 1.15rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.admin-topbar__cta:hover {
+  background: #dfc07e;
+  transform: translateY(-1px);
+}
+
+/* Page body */
+.admin-content {
+  flex: 1;
+  padding: 2rem 2.25rem;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Mobile backdrop */
+.admin-sidebar__backdrop {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 960px) {
+  .admin-sidebar {
+    position: fixed;
+    transform: translateX(-100%);
+    box-shadow: 10px 0 30px rgba(0,0,0,0.8);
+  }
+
+  .admin-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .admin-sidebar__backdrop.open {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 85;
+  }
+
+  .admin-topbar__menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .admin-topbar {
+    padding: 0 1.25rem;
+  }
+
+  .admin-content {
+    padding: 1.5rem 1rem;
+  }
+}

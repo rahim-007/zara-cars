@@ -1,0 +1,160 @@
+/* ============================================================
+   Zara Cars — Global Design Tokens & Base Styles
+   Theme: Black / Charcoal / Silver / Champagne accent
+   ============================================================ */
+
+:root {
+  /* — Palette — */
+  --c-black:       #060606;
+  --c-charcoal:    #0f0f0f;
+  --c-surface:     #141414;
+  --c-surface-2:   #1c1c1c;
+  --c-border:      rgba(255,255,255,0.07);
+  --c-border-hi:   rgba(255,255,255,0.13);
+
+  --c-silver:      #c0c0c0;
+  --c-silver-dim:  #767676;
+  --c-white:       #ebebeb;
+
+  --c-champagne:   #c8a96a;
+  --c-champagne-hi:#dfc07e;
+  --c-champagne-dim:#8c6e3f;
+
+  /* — Typography — */
+  --font-display:  'Bebas Neue', 'Impact', sans-serif;
+  --font-body:     'Outfit', system-ui, sans-serif;
+
+  /* — Spacing — */
+  --section-pad:   8rem 2rem;
+  --section-pad-sm:4rem 1.25rem;
+
+  /* — Transitions — */
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-expo:     cubic-bezier(0.19, 1, 0.22, 1);
+
+  /* — Radius — */
+  --radius-sm:     3px;
+  --radius-md:     6px;
+}
+
+/* — Reset & Base — */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--c-black);
+  color: var(--c-silver);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: none; /* replaced by custom cursor */
+}
+
+/* Mobile: restore default cursor */
+@media (hover: none) {
+  body { cursor: auto; }
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: none;
+}
+
+@media (hover: none) {
+  a { cursor: auto; }
+}
+
+button {
+  font-family: inherit;
+  cursor: none;
+  border: none;
+  background: none;
+}
+
+@media (hover: none) {
+  button { cursor: auto; }
+}
+
+/* — Page fade-in once preloader is done — */
+.app {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.app--ready {
+  opacity: 1;
+}
+
+/* ============================================================
+   Shared Utilities
+   ============================================================ */
+
+.container {
+  width: 100%;
+  max-width: 1360px;
+  margin-inline: auto;
+  padding-inline: 2.5rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--c-champagne);
+}
+
+.divider-line {
+  display: inline-block;
+  width: 36px;
+  height: 1px;
+  background: var(--c-champagne);
+  flex-shrink: 0;
+}
+
+/* Char-split animation base */
+.char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding-inline: 1.25rem;
+  }
+}

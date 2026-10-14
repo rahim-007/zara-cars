@@ -1,0 +1,314 @@
+/* ============================================================
+   Sell / Trade-In Valuation Estimator — Zara Cars
+   ============================================================ */
+
+.trade-in {
+  position: relative;
+  padding: var(--section-py) 0;
+  background-color: var(--c-charcoal);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.trade-in__header {
+  max-width: 760px;
+  margin-bottom: 3.5rem;
+}
+
+.trade-in__title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 5.5vw, 64px);
+  color: var(--c-white);
+  line-height: 1.05;
+  margin-top: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.trade-in__subtitle {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--c-gray-400);
+}
+
+/* ── Interactive Box ── */
+.trade-in__box {
+  background: rgba(14, 14, 14, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2.5rem;
+  padding: 3rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+}
+
+@media (max-width: 960px) {
+  .trade-in__box {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.5rem;
+  }
+}
+
+/* ── Steps & Controls ── */
+.trade-in__controls {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.trade-in__step {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.trade-in__label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--c-silver);
+  text-transform: uppercase;
+}
+
+.trade-in__step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(200, 169, 106, 0.2);
+  color: var(--c-champagne);
+  font-size: 11px;
+  font-family: var(--font-display);
+}
+
+.trade-in__chip-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem;
+}
+
+@media (max-width: 520px) {
+  .trade-in__chip-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.trade-in__chip {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--c-gray-300);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s ease;
+}
+
+.trade-in__chip:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(200, 169, 106, 0.4);
+  color: var(--c-white);
+}
+
+.trade-in__chip--active {
+  background: rgba(200, 169, 106, 0.12);
+  border-color: var(--c-champagne);
+  color: var(--c-white);
+  box-shadow: 0 0 16px rgba(200, 169, 106, 0.15);
+  font-weight: 600;
+}
+
+/* Year Scroll */
+.trade-in__year-scroll {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.35rem;
+}
+
+.trade-in__year-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.trade-in__year-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+.trade-in__year-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 1rem;
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--c-gray-400);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.trade-in__year-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--c-white);
+}
+
+.trade-in__year-btn--active {
+  background: var(--c-champagne);
+  border-color: var(--c-champagne);
+  color: var(--c-black);
+  font-weight: 700;
+}
+
+/* ── Result Panel ── */
+.trade-in__result-panel {
+  background: rgba(10, 10, 10, 0.85);
+  border: 1px solid rgba(200, 169, 106, 0.25);
+  border-radius: var(--radius-md);
+  padding: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.trade-in__result-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(200, 169, 106, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.trade-in__result-top {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.trade-in__result-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--c-champagne);
+}
+
+.trade-in__result-price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.trade-in__result-currency {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--c-champagne);
+}
+
+.trade-in__result-range {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 4.5vw, 48px);
+  color: var(--c-white);
+  line-height: 1;
+}
+
+.trade-in__result-unit {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--c-silver);
+  letter-spacing: 0.08em;
+}
+
+.trade-in__result-note {
+  font-size: 11.5px;
+  color: var(--c-gray-500);
+  line-height: 1.5;
+  margin-top: 0.25rem;
+}
+
+/* ── Perks ── */
+.trade-in__perks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.trade-in__perk {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12.5px;
+  color: var(--c-silver);
+}
+
+.trade-in__perk-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-champagne);
+  box-shadow: 0 0 8px var(--c-champagne);
+  flex-shrink: 0;
+}
+
+.trade-in__perk strong {
+  color: var(--c-white);
+}
+
+/* ── CTA Wrap ── */
+.trade-in__cta-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.trade-in__btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--c-champagne);
+  color: var(--c-black);
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 25px rgba(200, 169, 106, 0.3);
+  text-align: center;
+}
+
+.trade-in__btn-primary:hover {
+  background: #d8ba7d;
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(200, 169, 106, 0.5);
+}
+
+.trade-in__btn-subtle {
+  font-size: 11.5px;
+  color: var(--c-gray-400);
+  text-align: center;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.trade-in__btn-subtle:hover {
+  color: var(--c-champagne);
+}

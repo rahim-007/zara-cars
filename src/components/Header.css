@@ -1,0 +1,192 @@
+/* ============================================================
+   Header v2
+   ============================================================ */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 72px;
+  transition: background 0.5s ease, backdrop-filter 0.5s ease, border-color 0.5s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.header--scrolled {
+  background: rgba(6, 6, 6, 0.88);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border-bottom-color: var(--c-border);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 2rem;
+}
+
+/* ── Brand ── */
+.header__brand {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+  opacity: 0; /* animated in */
+  text-decoration: none;
+  transition: transform 0.25s ease;
+}
+
+.header__brand:hover {
+  transform: translateY(-1px);
+}
+
+.header__logo-img {
+  height: 40px;
+  width: auto;
+  max-width: 140px;
+  display: block;
+  object-fit: contain;
+  transition: filter 0.35s ease, transform 0.3s ease;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.7));
+}
+
+.header__brand:hover .header__logo-img {
+  /* Warm champagne metallic glint on hover */
+  filter: drop-shadow(0 0 14px rgba(200, 169, 106, 0.4)) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.9));
+}
+
+/* ── Nav ── */
+.header__nav-list {
+  display: flex;
+  list-style: none;
+  gap: 2.25rem;
+}
+
+.header__nav-link {
+  font-size: 11.5px;
+  font-weight: 400;
+  color: var(--c-silver-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 3px;
+  opacity: 0; /* animated in */
+  transition: color 0.25s ease;
+}
+
+.header__nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--c-champagne);
+  transition: width 0.35s var(--ease-out);
+}
+
+.header__nav-link:hover {
+  color: var(--c-white);
+}
+.header__nav-link:hover::after {
+  width: 100%;
+}
+
+/* ── CTA ── */
+.header__cta {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--c-black);
+  background: var(--c-champagne);
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  opacity: 0; /* animated in */
+  transition: background 0.25s ease, transform 0.15s ease;
+}
+.header__cta:hover  { background: var(--c-champagne-hi); }
+.header__cta:active { transform: scale(0.97); }
+
+/* ── Hamburger ── */
+.header__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  margin-left: auto;
+}
+.header__hamburger span {
+  display: block;
+  height: 1.5px;
+  background: var(--c-silver);
+  border-radius: 2px;
+  transform-origin: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.header__hamburger--open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.header__hamburger--open span:nth-child(2) { opacity: 0; }
+.header__hamburger--open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ── Mobile Drawer ── */
+.header__drawer {
+  position: fixed;
+  inset: 72px 0 0 0;
+  background: rgba(6, 6, 6, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  padding: 2.5rem 1.5rem;
+  transform: translateX(100%);
+  transition: transform 0.45s var(--ease-expo);
+  display: none;
+}
+.header__drawer--open { transform: translateX(0); }
+
+.header__drawer-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.header__drawer-link {
+  display: block;
+  padding: 1.1rem 0;
+  font-size: 26px;
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+  color: var(--c-silver);
+  border-bottom: 1px solid var(--c-border);
+  transition: color 0.2s ease;
+}
+.header__drawer-link:hover { color: var(--c-champagne); }
+
+.header__drawer-cta {
+  display: block;
+  margin-top: 2.5rem;
+  padding: 1rem;
+  border: 1px solid var(--c-champagne);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-champagne);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.header__drawer-cta:hover {
+  background: var(--c-champagne);
+  color: var(--c-black);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1023px) {
+  .header__nav, .header__cta { display: none; }
+  .header__hamburger { display: flex; }
+  .header__drawer    { display: block; }
+}

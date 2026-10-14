@@ -1,0 +1,661 @@
+/* ============================================================
+   Car Details Modal — Luxury Automotive Spec Sheet & Enquiry
+   ============================================================ */
+
+.car-modal__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(4, 4, 4, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  overflow-y: auto;
+  animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.car-modal__container {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  max-height: 92vh;
+  background: #0d0d0f;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md, 12px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 40px rgba(200, 169, 106, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: modalSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalSlideUp {
+  from { transform: translateY(24px) scale(0.97); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* ── Top Bar ── */
+.car-modal__top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.75rem;
+  background: rgba(18, 18, 22, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.car-modal__top-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.car-modal__showroom-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--c-silver, #b8b8b8);
+  text-transform: uppercase;
+}
+
+.car-modal__pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-champagne, #c8a96a);
+  box-shadow: 0 0 10px var(--c-champagne, #c8a96a);
+  animation: modalPulse 1.8s infinite;
+}
+
+@keyframes modalPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.5; }
+}
+
+.car-modal__badge {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--c-champagne, #c8a96a);
+  background: rgba(200, 169, 106, 0.15);
+  border: 1px solid rgba(200, 169, 106, 0.35);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.car-modal__close-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--c-silver-dim, #888);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.car-modal__close-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+/* ── Content Body (Scrollable) ── */
+.car-modal__content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  overscroll-behavior: contain;
+}
+
+/* ── Hero Grid (Gallery + Header Card) ── */
+.car-modal__hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 1.75rem;
+}
+
+/* Gallery */
+.car-modal__gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.car-modal__main-photo-wrap {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.car-modal__main-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.car-modal__photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(8, 8, 8, 0.8) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.car-modal__photo-tag {
+  position: absolute;
+  bottom: 0.85rem;
+  left: 0.85rem;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-champagne, #c8a96a);
+  background: rgba(10, 10, 10, 0.75);
+  backdrop-filter: blur(6px);
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(200, 169, 106, 0.3);
+}
+
+.car-modal__thumbs {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.car-modal__thumb {
+  flex: 1;
+  aspect-ratio: 16 / 10;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  background: #000;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.car-modal__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.car-modal__thumb:hover,
+.car-modal__thumb--active {
+  border-color: var(--c-champagne, #c8a96a);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(200, 169, 106, 0.3);
+}
+
+/* Header Card */
+.car-modal__header-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.car-modal__year-pill {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--c-champagne, #c8a96a);
+  margin-bottom: 0.35rem;
+}
+
+.car-modal__car-name {
+  font-family: var(--font-display, sans-serif);
+  font-size: clamp(24px, 3vw, 34px);
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.5rem;
+}
+
+.car-modal__tagline {
+  font-size: 12.5px;
+  color: var(--c-silver-dim, #999);
+  line-height: 1.6;
+}
+
+/* Pricing Block */
+.car-modal__pricing-block {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(200, 169, 106, 0.25);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.car-modal__price-figure {
+  font-family: var(--font-display, sans-serif);
+  font-size: 28px;
+  color: var(--c-champagne, #c8a96a);
+  display: block;
+  line-height: 1;
+}
+
+.car-modal__price-sub {
+  font-size: 10px;
+  color: var(--c-silver, #b8b8b8);
+  letter-spacing: 0.05em;
+  margin-top: 3px;
+  display: block;
+}
+
+.car-modal__savings-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.car-modal__orig-price {
+  font-size: 11px;
+  color: var(--c-silver-dim, #777);
+  text-decoration: line-through;
+}
+
+.car-modal__save-text {
+  font-size: 11px;
+  font-weight: 700;
+  color: #25d366;
+  background: rgba(37, 211, 102, 0.1);
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+/* Meta Grid */
+.car-modal__meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+}
+
+.car-modal__meta-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.65rem 0.85rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.car-modal__meta-label {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-silver-dim, #777);
+}
+
+.car-modal__meta-val {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.car-modal__meta-val.text-champagne {
+  color: var(--c-champagne, #c8a96a);
+}
+
+/* ── Section Dividers & Titles ── */
+.car-modal__section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.car-modal__section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.car-modal__section-title .divider-line {
+  width: 18px;
+  height: 2px;
+  background: var(--c-champagne, #c8a96a);
+}
+
+/* ── Features Grid ── */
+.car-modal__features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+}
+
+.car-modal__feature-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.6rem 0.85rem;
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--c-silver, #ccc);
+}
+
+.car-modal__feature-check {
+  color: var(--c-champagne, #c8a96a);
+  display: flex;
+}
+
+/* ── Specs Table ── */
+.car-modal__specs-table {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 1.25rem;
+  border-radius: 8px;
+}
+
+.car-modal__spec-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  font-size: 12px;
+}
+
+.car-modal__spec-name {
+  color: var(--c-silver-dim, #777);
+}
+
+.car-modal__spec-value {
+  color: #fff;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* ── 140-Point Checks Grid ── */
+.car-modal__checks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.car-modal__check-card {
+  background: rgba(200, 169, 106, 0.04);
+  border: 1px solid rgba(200, 169, 106, 0.18);
+  border-radius: 6px;
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.car-modal__check-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.car-modal__check-cat {
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.car-modal__check-badge {
+  font-size: 9px;
+  font-weight: 700;
+  color: #25d366;
+  background: rgba(37, 211, 102, 0.12);
+  padding: 2px 6px;
+  border-radius: 3px;
+  letter-spacing: 0.05em;
+}
+
+.car-modal__check-detail {
+  font-size: 11px;
+  color: var(--c-silver-dim, #888);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ── Assurance Box ── */
+.car-modal__assurance-box {
+  background: linear-gradient(135deg, rgba(200, 169, 106, 0.1) 0%, rgba(14, 14, 18, 0.8) 100%);
+  border: 1px solid rgba(200, 169, 106, 0.3);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.car-modal__assurance-text h4 {
+  font-family: var(--font-display, sans-serif);
+  font-size: 16px;
+  color: var(--c-champagne, #c8a96a);
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.02em;
+}
+
+.car-modal__assurance-text p {
+  font-size: 12px;
+  color: var(--c-silver, #b8b8b8);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.car-modal__assurance-seal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(8, 8, 8, 0.6);
+  border: 1px solid rgba(200, 169, 106, 0.4);
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.car-modal__seal-tag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--c-champagne, #c8a96a);
+}
+
+.car-modal__seal-motto {
+  font-family: var(--font-display, sans-serif);
+  font-size: 15px;
+  color: #fff;
+  letter-spacing: 0.08em;
+}
+
+/* ── Sticky Action Bar (Bottom) ── */
+.car-modal__actions-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.75rem;
+  background: rgba(14, 14, 18, 0.98);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  gap: 1.25rem;
+  z-index: 10;
+}
+
+.car-modal__action-price-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.car-modal__summary-label {
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--c-silver-dim, #777);
+  text-transform: uppercase;
+}
+
+.car-modal__summary-price {
+  font-family: var(--font-display, sans-serif);
+  font-size: 24px;
+  color: var(--c-champagne, #c8a96a);
+  line-height: 1;
+}
+
+.car-modal__action-btns {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.car-modal__btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #25d366;
+  color: #000;
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 0.75rem 1.4rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.car-modal__btn-whatsapp:hover {
+  background: #22c35e;
+  box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+  transform: translateY(-1px);
+}
+
+.car-modal__btn-testdrive {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 0.75rem 1.25rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.car-modal__btn-testdrive:hover {
+  background: var(--c-champagne, #c8a96a);
+  border-color: var(--c-champagne, #c8a96a);
+  color: #000;
+}
+
+.car-modal__btn-call {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.car-modal__btn-call:hover {
+  border-color: var(--c-champagne, #c8a96a);
+  color: var(--c-champagne, #c8a96a);
+}
+
+/* ── Responsive Adaptations ── */
+@media (max-width: 860px) {
+  .car-modal__hero-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .car-modal__checks-grid {
+    grid-template-columns: 1fr;
+  }
+  .car-modal__specs-table {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .car-modal__backdrop {
+    padding: 0;
+    align-items: flex-end;
+  }
+  .car-modal__container {
+    max-height: 94vh;
+    border-radius: 16px 16px 0 0;
+  }
+  .car-modal__content {
+    padding: 1.25rem;
+    gap: 1.5rem;
+  }
+  .car-modal__features-grid {
+    grid-template-columns: 1fr;
+  }
+  .car-modal__actions-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+  .car-modal__action-price-summary {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .car-modal__action-btns {
+    width: 100%;
+  }
+  .car-modal__btn-whatsapp {
+    flex: 1;
+    justify-content: center;
+  }
+  .car-modal__btn-testdrive {
+    display: none; /* Keep primary WhatsApp on small mobile */
+  }
+}

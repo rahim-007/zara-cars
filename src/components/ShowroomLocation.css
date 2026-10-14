@@ -1,0 +1,261 @@
+/* ============================================================
+   Showroom Location Section — Sri Balaji Complex
+   ============================================================ */
+
+.showroom {
+  padding: var(--section-pad);
+  background-color: var(--c-black);
+  position: relative;
+}
+
+.showroom__header {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3rem;
+  align-items: flex-end;
+  margin-bottom: 4rem;
+}
+
+.showroom__title {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 6vw, 84px);
+  color: var(--c-white);
+  line-height: 0.94;
+  letter-spacing: 0.01em;
+  margin-top: 0.5rem;
+}
+
+.showroom__title .text-champagne {
+  color: var(--c-champagne);
+}
+
+.showroom__intro {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--c-silver-dim);
+  line-height: 1.7;
+  max-width: 480px;
+}
+
+/* ── Interactive Bento Box ── */
+.showroom__box {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+}
+
+/* Media Stage */
+.showroom__media {
+  position: relative;
+  min-height: 480px;
+  overflow: hidden;
+  border-right: 1px solid var(--c-border);
+}
+
+.showroom__media-img {
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  object-position: center;
+  will-change: transform;
+  filter: contrast(1.1) brightness(0.85);
+}
+
+.showroom__media-tint {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent 50%, var(--c-surface) 100%),
+              linear-gradient(to top, rgba(14, 14, 14, 0.7) 0%, transparent 60%);
+}
+
+.showroom__badge {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(8, 8, 8, 0.75);
+  border: 1px solid var(--c-border-hi);
+  backdrop-filter: blur(12px);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-silver);
+}
+
+.showroom__badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34d399; /* Green status indicator */
+  box-shadow: 0 0 8px #34d399;
+}
+
+/* Details Panel */
+.showroom__details {
+  padding: 3.5rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.showroom__motto {
+  margin-bottom: 0.5rem;
+}
+
+.showroom__motto-logo {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.showroom__label {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-champagne);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.showroom__address-main {
+  font-family: var(--font-display);
+  font-size: 36px;
+  color: var(--c-white);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+}
+
+.showroom__address-sub {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--c-silver-dim);
+  line-height: 1.6;
+}
+
+.showroom__info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--c-border);
+  border-bottom: 1px solid var(--c-border);
+}
+
+.showroom__info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.showroom__info-label {
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--c-champagne);
+  text-transform: uppercase;
+}
+
+.showroom__info-val {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--c-silver);
+  line-height: 1.4;
+}
+
+/* Action Buttons */
+.showroom__actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.showroom__btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-black);
+  background: var(--c-champagne);
+  padding: 13px 24px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  transition: background 0.25s ease, gap 0.25s ease;
+}
+
+.showroom__btn-primary:hover {
+  background: var(--c-champagne-hi);
+  gap: 14px;
+}
+
+.showroom__btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-silver);
+  border: 1px solid var(--c-border-hi);
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.showroom__btn-ghost:hover {
+  color: var(--c-white);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1023px) {
+  .showroom__header {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .showroom__box {
+    grid-template-columns: 1fr;
+  }
+  .showroom__media {
+    min-height: 320px;
+    border-right: none;
+    border-bottom: 1px solid var(--c-border);
+  }
+  .showroom__details {
+    padding: 2.5rem 2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .showroom {
+    padding: var(--section-pad-sm);
+  }
+  .showroom__info-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .showroom__actions {
+    flex-direction: column;
+  }
+  .showroom__btn-primary,
+  .showroom__btn-ghost {
+    width: 100%;
+    justify-content: center;
+  }
+}

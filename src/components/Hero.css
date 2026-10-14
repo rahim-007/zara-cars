@@ -1,0 +1,465 @@
+/* ============================================================
+   Cinema Ignition Hero Section — Tier 1 Automotive
+   ============================================================ */
+
+.hero-pin-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.hero {
+  position: relative;
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background-color: var(--c-black);
+}
+
+/* ── Stage & Car Image ── */
+.hero__stage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero__car-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 32%;
+  will-change: transform;
+  transform-origin: center center;
+  filter: contrast(1.08) brightness(0.92);
+  transition: filter 0.8s ease;
+}
+
+.hero--ignited .hero__car-img {
+  filter: contrast(1.15) brightness(1.05);
+}
+
+.hero__vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(6, 6, 6, 0.98) 0%, rgba(6, 6, 6, 0.55) 45%, rgba(6, 6, 6, 0.1) 75%, rgba(6, 6, 6, 0.3) 100%),
+    linear-gradient(90deg, rgba(6, 6, 6, 0.75) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ── Dual LED Headlight Laser Beams ── */
+.hero__beam {
+  position: absolute;
+  width: 280px;
+  height: 520px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s ease;
+  mix-blend-mode: screen;
+}
+
+.hero__beam--left {
+  top: 42%;
+  left: 28%;
+  background: radial-gradient(ellipse at top left, rgba(230, 240, 255, 0.85) 0%, rgba(200, 169, 106, 0.4) 30%, transparent 70%);
+  transform: rotate(-18deg) scaleY(0.8);
+  transform-origin: top left;
+}
+
+.hero__beam--right {
+  top: 42%;
+  right: 28%;
+  background: radial-gradient(ellipse at top right, rgba(230, 240, 255, 0.85) 0%, rgba(200, 169, 106, 0.4) 30%, transparent 70%);
+  transform: rotate(18deg) scaleY(0.8);
+  transform-origin: top right;
+}
+
+.hero__beam--active {
+  opacity: 0.9;
+  transform: rotate(var(--angle, 0deg)) scaleY(1.2);
+}
+
+.hero__beam--left.hero__beam--active {
+  --angle: -18deg;
+}
+
+.hero__beam--right.hero__beam--active {
+  --angle: 18deg;
+}
+
+/* ── Anamorphic Lens Flare ── */
+.hero__lens-flare {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  height: 4px;
+  background: linear-gradient(90deg, transparent 0%, rgba(200, 169, 106, 0.8) 45%, #ffffff 50%, rgba(200, 169, 106, 0.8) 55%, transparent 100%);
+  box-shadow: 0 0 40px 10px rgba(200, 169, 106, 0.6), 0 0 100px 30px rgba(255, 255, 255, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.hero__lens-flare--active {
+  opacity: 0.85;
+}
+
+/* ── Speed Streaks ── */
+.hero__speed-lines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 40px,
+    rgba(255, 255, 255, 0.015) 41px,
+    transparent 42px
+  );
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Noise Film Grain ── */
+.hero__noise {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  opacity: 0.025;
+  mix-blend-mode: overlay;
+}
+
+/* ── Floating Telemetry HUD (Top Right) ── */
+.hero__hud {
+  position: absolute;
+  top: 6.5rem;
+  right: 2.5rem;
+  z-index: 3;
+}
+
+.hero__hud-panel {
+  background: rgba(14, 14, 14, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 260px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.hero__hud-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.6rem;
+}
+
+.hero__hud-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-champagne);
+  box-shadow: 0 0 8px var(--c-champagne);
+  animation: hudBlink 2s infinite;
+}
+
+@keyframes hudBlink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.8); }
+}
+
+.hero__hud-tag {
+  font-family: var(--font-body);
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--c-silver);
+}
+
+.hero__hud-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.hero__hud-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero__hud-val {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--c-white);
+  line-height: 1;
+  letter-spacing: 0.05em;
+}
+
+.hero__hud-unit {
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--c-champagne);
+}
+
+/* ── Content ── */
+.hero__content {
+  position: relative;
+  z-index: 4;
+  padding-bottom: 7rem;
+  padding-top: 12rem;
+  max-width: 900px;
+}
+
+.hero__eyebrow {
+  margin-bottom: 1.25rem;
+}
+
+/* ── Char-Split Headline ── */
+.hero__headline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 1.75rem;
+  perspective: 1200px;
+}
+
+.hero__word {
+  display: block;
+  overflow: hidden;
+  line-height: 0.88;
+  will-change: transform, opacity;
+}
+
+.hero__word-inner {
+  display: flex;
+  font-family: var(--font-display);
+  font-size: clamp(82px, 13vw, 172px);
+  letter-spacing: 0.01em;
+}
+
+.hero__word--0 .hero__word-inner {
+  color: var(--c-white);
+}
+
+.hero__word--1 .hero__word-inner {
+  color: var(--c-champagne);
+  padding-left: clamp(1rem, 3vw, 2.5rem);
+}
+
+.hero__word--2 .hero__word-inner {
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.45);
+  color: transparent;
+  padding-left: clamp(2rem, 6vw, 5rem);
+}
+
+.hero__char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+.hero__char--space {
+  display: inline-block;
+  width: 0.28em;
+}
+
+/* ── Sub ── */
+.hero__sub {
+  font-size: clamp(14px, 1.35vw, 18px);
+  font-weight: 300;
+  color: var(--c-silver);
+  max-width: 480px;
+  line-height: 1.65;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Actions Row ── */
+.hero__actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Interactive Ignition Switch */
+.hero__ignition-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 22px;
+  border-radius: var(--radius-sm);
+  background: rgba(200, 169, 106, 0.12);
+  border: 1px solid var(--c-champagne);
+  color: var(--c-champagne);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__ignition-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--c-champagne);
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+
+.hero__ignition-btn > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero__ignition-btn:hover::before,
+.hero__ignition-btn--active::before {
+  transform: translateY(0);
+}
+
+.hero__ignition-btn:hover,
+.hero__ignition-btn--active {
+  color: var(--c-black);
+  box-shadow: 0 0 24px rgba(200, 169, 106, 0.5);
+}
+
+.hero__ignition-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulseRotate 4s linear infinite;
+}
+
+@keyframes pulseRotate {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.hero__btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-black);
+  background: var(--c-white);
+  padding: 14px 28px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  transition: background 0.25s ease, gap 0.25s ease, transform 0.15s ease;
+}
+
+.hero__btn-primary:hover {
+  background: #ffffff;
+  gap: 14px;
+}
+.hero__btn-primary:active { transform: scale(0.98); }
+
+.hero__btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11.5px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-silver-dim);
+  border: 1px solid var(--c-border-hi);
+  padding: 13px 24px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.hero__btn-ghost:hover {
+  color: var(--c-white);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* ── Scroll Mouse Indicator ── */
+.hero__scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  right: 2.5rem;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero__scroll-mouse {
+  width: 22px;
+  height: 36px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.hero__scroll-wheel {
+  width: 3px;
+  height: 6px;
+  background: var(--c-champagne);
+  border-radius: 2px;
+  margin-top: 6px;
+  animation: scrollWheel 2s infinite;
+}
+
+@keyframes scrollWheel {
+  0% { transform: translateY(0); opacity: 1; }
+  80% { transform: translateY(12px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+
+.hero__scroll-indicator span {
+  font-size: 8px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--c-silver-dim);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1023px) {
+  .hero__hud {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero__content {
+    padding-bottom: 5rem;
+  }
+  .hero__word--1 .hero__word-inner { padding-left: 0.5rem; }
+  .hero__word--2 .hero__word-inner { padding-left: 1rem; }
+  
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero__ignition-btn,
+  .hero__btn-primary,
+  .hero__btn-ghost {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero__scroll-indicator {
+    display: none;
+  }
+}

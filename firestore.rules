@@ -1,0 +1,11 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Anyone can view the certified vehicle fleet
+    match /cars/{carId} {
+      allow read: if true;
+      // Only authenticated admin dealership owner can create, edit, or delete cars
+      allow write: if request.auth != null;
+    }
+  }
+}

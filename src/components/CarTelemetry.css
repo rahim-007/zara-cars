@@ -1,0 +1,375 @@
+/* ============================================================
+   Car Telemetry & Anatomy Pinned Scroll Section
+   ============================================================ */
+
+.telemetry-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.telemetry {
+  position: relative;
+  min-height: 100dvh;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--c-black);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ── Viewport & Slides ── */
+.telemetry__viewport {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.telemetry__slide {
+  position: absolute;
+  inset: 0;
+  will-change: transform, opacity;
+  transform-origin: center center;
+}
+
+.telemetry__slide-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: contrast(1.1) brightness(0.85);
+}
+
+.telemetry__slide-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(6, 6, 6, 0.95) 0%, rgba(6, 6, 6, 0.4) 40%, transparent 70%),
+    linear-gradient(to bottom, rgba(6, 6, 6, 0.9) 0%, transparent 35%);
+}
+
+/* ── Interactive Hotspots ── */
+.telemetry__hotspots {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.telemetry__hotspot {
+  position: absolute;
+  pointer-events: auto;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+}
+
+.telemetry__hotspot-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--c-champagne);
+  box-shadow: 0 0 16px var(--c-champagne);
+  border: 2px solid #ffffff;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.telemetry__hotspot:hover .telemetry__hotspot-dot {
+  transform: scale(1.35);
+}
+
+.telemetry__hotspot-ping {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--c-champagne);
+  animation: hotspotPing 2.2s infinite;
+  z-index: 1;
+}
+
+@keyframes hotspotPing {
+  0% { transform: translate(-50%, -50%) scale(0.6); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
+}
+
+/* Hotspot Popover */
+.telemetry__hotspot-popover {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: rgba(14, 14, 14, 0.85);
+  border: 1px solid rgba(200, 169, 106, 0.4);
+  backdrop-filter: blur(16px);
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  min-width: 240px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
+}
+
+.telemetry__hotspot:hover .telemetry__hotspot-popover {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(8px);
+}
+
+.telemetry__hotspot-title {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-white);
+  margin-bottom: 4px;
+}
+
+.telemetry__hotspot-desc {
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--c-silver-dim);
+  line-height: 1.5;
+}
+
+/* ── Top Header Navigation ── */
+.telemetry__header {
+  position: relative;
+  z-index: 3;
+  padding-top: 6.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.telemetry__brand-tag {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-silver-dim);
+}
+
+.telemetry__trackers {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.telemetry__tracker {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 80px;
+  opacity: 0.4;
+  transition: opacity 0.4s ease;
+}
+
+.telemetry__tracker--active {
+  opacity: 1;
+}
+
+.telemetry__tracker-num {
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--c-champagne);
+  letter-spacing: 0.05em;
+}
+
+.telemetry__tracker-name {
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-white);
+}
+
+.telemetry__tracker-bar {
+  height: 2px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.telemetry__tracker-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--c-champagne);
+  transition: width 0.4s ease;
+}
+
+.telemetry__tracker--active .telemetry__tracker-fill {
+  width: 100%;
+}
+
+/* ── Bottom HUD Deck ── */
+.telemetry__deck {
+  position: relative;
+  z-index: 3;
+  padding-bottom: 3.5rem;
+  width: 100%;
+}
+
+.telemetry__deck-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 3rem;
+  width: 100%;
+}
+
+.telemetry__stage-info {
+  max-width: 520px;
+}
+
+.telemetry__stage-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-champagne);
+  margin-bottom: 0.5rem;
+  border-left: 2px solid var(--c-champagne);
+  padding-left: 8px;
+}
+
+.telemetry__stage-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.2vw, 62px);
+  color: var(--c-white);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.6rem;
+}
+
+.telemetry__stage-sub {
+  font-size: 14px;
+  color: var(--c-silver-dim);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.telemetry__scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-champagne);
+  margin-top: 1.5rem;
+  opacity: 0.85;
+}
+
+.telemetry__scroll-line {
+  height: 1px;
+  width: 48px;
+  background: var(--c-champagne);
+}
+
+/* Telemetry Stats Grid */
+.telemetry__stats-grid {
+  display: flex;
+  gap: 1.25rem;
+  flex-shrink: 0;
+}
+
+.telemetry__stat-card {
+  background: rgba(14, 14, 14, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  padding: 1.1rem 1.5rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 130px;
+}
+
+.telemetry__stat-val {
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: 1;
+  color: var(--c-champagne);
+  letter-spacing: 0.03em;
+}
+
+.telemetry__stat-unit {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--c-white);
+  text-transform: uppercase;
+}
+
+.telemetry__stat-label {
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  color: var(--c-silver-dim);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1023px) {
+  .telemetry__deck-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+  .telemetry__stats-grid {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .telemetry__header {
+    padding-top: 5.5rem;
+  }
+  .telemetry__trackers {
+    gap: 0.75rem;
+  }
+  .telemetry__tracker {
+    min-width: 60px;
+  }
+  .telemetry__hotspot-popover {
+    left: 0;
+    transform: translateY(8px);
+    min-width: 200px;
+  }
+  .telemetry__hotspot:hover .telemetry__hotspot-popover {
+    transform: translateY(6px);
+  }
+  .telemetry__deck {
+    padding-bottom: 2rem;
+  }
+  .telemetry__stage-title {
+    font-size: 28px;
+  }
+  .telemetry__stage-sub {
+    font-size: 12px;
+  }
+  .telemetry__stat-card {
+    min-width: 105px;
+    padding: 0.75rem 1rem;
+  }
+  .telemetry__stat-val {
+    font-size: 24px;
+  }
+}

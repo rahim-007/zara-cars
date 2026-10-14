@@ -1,0 +1,62 @@
+/* ============================================================
+   Custom Magnetic Cursor with Dynamic Badges
+   ============================================================ */
+
+.cursor__dot,
+.cursor__ring,
+.cursor__label {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+.cursor__dot {
+  width: 5px;
+  height: 5px;
+  background: var(--c-champagne);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(200, 169, 106, 0.8);
+}
+
+.cursor__ring {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(200, 169, 106, 0.6);
+  background: transparent;
+  opacity: 0.85;
+  backdrop-filter: blur(2px);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.cursor__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.7);
+  transition: opacity 0.25s ease;
+}
+
+.cursor__label span {
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-champagne);
+  white-space: nowrap;
+}
+
+/* Hide on touch devices */
+@media (hover: none), (pointer: coarse) {
+  .cursor__dot,
+  .cursor__ring,
+  .cursor__label {
+    display: none;
+  }
+}
