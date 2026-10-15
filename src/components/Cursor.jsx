@@ -8,12 +8,10 @@ export default function Cursor() {
   const labelRef = useRef(null)
   const [cursorText, setCursorText] = useState('')
 
-  // Skip custom cursor in Admin portal to preserve standard pointer, text selection, and form inputs
-  if (typeof window !== 'undefined' && window.location.pathname.startsWith('/admin')) {
-    return null
-  }
-
   useEffect(() => {
+    // Skip custom cursor in Admin portal to preserve standard pointer, text selection, and form inputs
+    if (typeof window !== 'undefined' && window.location.pathname.startsWith('/admin')) return
+
     // Only on pointer devices
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
 
@@ -115,6 +113,10 @@ export default function Cursor() {
       })
     }
   }, [])
+
+  if (typeof window !== 'undefined' && window.location.pathname.startsWith('/admin')) {
+    return null
+  }
 
   return (
     <>

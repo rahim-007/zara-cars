@@ -16,12 +16,17 @@
   --c-silver-dim:  #767676;
   --c-white:       #ebebeb;
 
+  --c-warm-white:  #EDE8E0;
+  --c-muted-grey:  #A6A19A;
+  --c-gold:        #C9A05C;
+
   --c-champagne:   #c8a96a;
   --c-champagne-hi:#dfc07e;
   --c-champagne-dim:#8c6e3f;
 
   /* — Typography — */
   --font-display:  'Bebas Neue', 'Impact', sans-serif;
+  --font-editorial:'Cinzel', 'Bebas Neue', Georgia, serif;
   --font-body:     'Outfit', system-ui, sans-serif;
 
   /* — Spacing — */
